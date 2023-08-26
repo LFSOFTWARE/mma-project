@@ -1,6 +1,11 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { Event } from 'src/models/event.entity';
+import { Fight } from 'src/models/fight.entity';
+import { Fighter } from 'src/models/fighter.entity';
+import { Ranking } from 'src/models/ranking.entity';
+import { Statistics } from 'src/models/statistics.entity';
 
 @Module({
   imports: [
@@ -17,7 +22,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
         username: 'postgres',
         password: 'password',
         database: 'mma',
-        entities: [],
+        entities: [Fighter, Statistics, Event, Fight, Ranking],
         synchronize: true,
       }),
     }),

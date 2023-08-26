@@ -7,18 +7,17 @@ export class Fighter {
   fighter_id: number;
 
   @Column()
-  nome: string;
+  name: string;
 
   @Column()
   weight_class: string;
 
   @Column()
-  nacionalidade: string;
+  nationality: string;
 
   @Column()
-  equipe: string;
+  team: string;
 
-  // Relacionamento um-para-muitos com a entidade Statistics (se estiver definida)
   @OneToMany(() => Statistics, (statistics) => statistics.fighter)
   statistics: Statistics[];
 }

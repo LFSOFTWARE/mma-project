@@ -1,11 +1,19 @@
 import { Injectable } from '@nestjs/common';
 import { CreateFighterDto } from './dto/create-fighter.dto';
 import { UpdateFighterDto } from './dto/update-fighter.dto';
+import { Repository } from 'typeorm';
+import { Fighter } from 'src/models/fighter.entity';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class FighterService {
+  constructor(
+    @InjectRepository(Fighter)
+    private repository: Repository<Fighter>,
+  ) {}
   create(createFighterDto: CreateFighterDto) {
-    return 'This action adds a new fighter';
+    const newFighter = this.repository.create(createFighterDto);
+    return this.repository.save(newFighter);
   }
 
   findAll() {
