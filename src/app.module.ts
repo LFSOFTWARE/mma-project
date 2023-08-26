@@ -6,6 +6,7 @@ import { DatabaseModule } from './database/database.module';
 import { FighterModule } from './fighter/fighter.module';
 import { EventModule } from './event/event.module';
 import { FightModule } from './fight/fight.module';
+import { RankingModule } from './ranking/ranking.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { FightModule } from './fight/fight.module';
     FighterModule,
     EventModule,
     FightModule,
+    RankingModule,
   ],
   controllers: [AppController],
   providers: [AppService],
