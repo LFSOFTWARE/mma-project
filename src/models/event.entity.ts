@@ -4,7 +4,7 @@ import { Fight } from './fight.entity';
 @Entity()
 export class Event {
   @PrimaryGeneratedColumn()
-  event_id: number;
+  id: number;
 
   @Column()
   nome: string;

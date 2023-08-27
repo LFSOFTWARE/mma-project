@@ -16,27 +16,30 @@ export class FighterController {
   constructor(private readonly fighterService: FighterService) {}
 
   @Post()
-  create(@Body() createFighterDto: CreateFighterDto) {
-    return this.fighterService.create(createFighterDto);
+  async create(@Body() createFighterDto: CreateFighterDto) {
+    return await this.fighterService.create(createFighterDto);
   }
 
   @Get()
-  findAll() {
-    return this.fighterService.findAll();
+  async findAll() {
+    return await this.fighterService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.fighterService.findOne(+id);
+  async findOne(@Param('id') id: string) {
+    return await this.fighterService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateFighterDto: UpdateFighterDto) {
-    return this.fighterService.update(+id, updateFighterDto);
+  async update(
+    @Param('id') id: string,
+    @Body() updateFighterDto: UpdateFighterDto,
+  ) {
+    return await this.fighterService.update(+id, updateFighterDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.fighterService.remove(+id);
+  async remove(@Param('id') id: string) {
+    return await this.fighterService.remove(+id);
   }
 }

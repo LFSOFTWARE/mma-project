@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateFighterDto } from './dto/create-fighter.dto';
 import { UpdateFighterDto } from './dto/update-fighter.dto';
 import { Repository } from 'typeorm';
@@ -11,24 +11,49 @@ export class FighterService {
     @InjectRepository(Fighter)
     private repository: Repository<Fighter>,
   ) {}
-  create(createFighterDto: CreateFighterDto) {
+
+  async create(createFighterDto: CreateFighterDto) {
     const newFighter = this.repository.create(createFighterDto);
-    return this.repository.save(newFighter);
+    return await this.repository.save(newFighter);
   }
 
-  findAll() {
-    return `This action returns all fighter`;
+  async findAll(
+    page = 1,
+    pageSize = 50,
+  ): Promise<{ fighters: Fighter[]; total: number }> {
+    const [fighters, total] = await this.repository.findAndCount({
+      skip: (page - 1) * pageSize,
+      take: pageSize,
+    });
+
+    return { fighters, total };
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} fighter`;
+  async findOne(id: number) {
+    const fighter = await this.repository.findOne({ where: { id } });
+    if (!fighter) {
+      throw new NotFoundException('Fighter not found');
+    }
+    return fighter;
   }
 
-  update(id: number, updateFighterDto: UpdateFighterDto) {
-    return `This action updates a #${id} fighter`;
+  async update(id: number, updateFighterDto: UpdateFighterDto) {
+    const fighter = await this.repository.findOne({ where: { id } });
+
+    if (!fighter) {
+      throw new NotFoundException('Fighter not found');
+    }
+
+    await this.repository.update(id, updateFighterDto);
+
+    return await this.repository.findOne({ where: { id } });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} fighter`;
+  async remove(id: number) {
+    const fighter = await this.repository.findOne({ where: { id } });
+    if (!fighter) {
+      throw new NotFoundException('Fighter not found');
+    }
+    return await this.repository.remove(fighter);
   }
 }

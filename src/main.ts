@@ -10,7 +10,7 @@ async function bootstrap() {
   app.useGlobalInterceptors(new TimeouInterceptor());
   app.useGlobalFilters(new AllExceptions());
   app.useGlobalPipes(new ValidationPipe());
-
+  app.setGlobalPrefix('api');
   Date.prototype.toJSON = function (): any {
     return momentTimezone(this)
       .tz('America/Sao_Paulo')

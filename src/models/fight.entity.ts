@@ -11,7 +11,7 @@ import { Fighter } from './fighter.entity'; // Importe a entidade Fighter aqui
 @Entity()
 export class Fight {
   @PrimaryGeneratedColumn()
-  fight_id: number;
+  id: number;
 
   @ManyToOne(() => Event)
   @JoinColumn({ name: 'event_id' })

@@ -10,7 +10,7 @@ import { Fighter } from './fighter.entity'; // Importe a entidade Fighter aqui
 @Entity()
 export class Ranking {
   @PrimaryGeneratedColumn()
-  ranking_id: number;
+  id: number;
 
   @Column()
   weight_class: string;

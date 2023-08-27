@@ -4,7 +4,7 @@ import { Statistics } from './statistics.entity'; // Importe a entidade Statisti
 @Entity()
 export class Fighter {
   @PrimaryGeneratedColumn()
-  fighter_id: number;
+  id: number;
 
   @Column()
   name: string;
