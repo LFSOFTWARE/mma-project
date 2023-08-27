@@ -1,26 +1,94 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateFightDto } from './dto/create-fight.dto';
 import { UpdateFightDto } from './dto/update-fight.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Fight } from 'src/models/fight.entity';
+import { Repository } from 'typeorm';
+import { Fighter } from 'src/models/fighter.entity';
+import { Event } from 'src/models/event.entity';
 
 @Injectable()
 export class FightService {
-  create(createFightDto: CreateFightDto) {
-    return 'This action adds a new fight';
+  constructor(
+    @InjectRepository(Fight)
+    private repository: Repository<Fight>,
+    @InjectRepository(Event)
+    private eventRepository: Repository<Event>,
+    @InjectRepository(Fighter)
+    private fighterRepository: Repository<Fighter>,
+  ) {}
+
+  async create(createFightDto: CreateFightDto) {
+    const event = await this.eventRepository.findOne({
+      where: { id: createFightDto.event },
+    });
+
+    if (!event) {
+      throw new NotFoundException('Event not found');
+    }
+    const fighterA = await this.fighterRepository.findOne({
+      where: { id: createFightDto.fighterA },
+    });
+
+    if (!fighterA) {
+      throw new NotFoundException('FighterA not found');
+    }
+
+    const fighterB = await this.fighterRepository.findOne({
+      where: { id: createFightDto.fighterB },
+    });
+
+    if (!fighterB) {
+      throw new NotFoundException('FighterB not found');
+    }
+
+    const newFight = this.repository.create({
+      event,
+      fighterA,
+      fighterB,
+      resultado: createFightDto.resultado,
+    });
+
+    return await this.repository.save(newFight);
   }
 
-  findAll() {
-    return `This action returns all fight`;
+  async findAll(
+    page = 1,
+    pageSize = 50,
+  ): Promise<{ fights: Fight[]; total: number }> {
+    const [fights, total] = await this.repository.findAndCount({
+      skip: (page - 1) * pageSize,
+      take: pageSize,
+    });
+
+    return { fights, total };
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} fight`;
+  async findOne(id: number) {
+    const fight = await this.repository.findOne({ where: { id } });
+    if (!fight) {
+      throw new NotFoundException('Fight not found');
+    }
+    return fight;
   }
 
-  update(id: number, updateFightDto: UpdateFightDto) {
-    return `This action updates a #${id} fight`;
+  async update(id: number, updateFightDto: UpdateFightDto) {
+    const fight = await this.repository.findOne({ where: { id } });
+
+    if (!fight) {
+      throw new NotFoundException('Fight not found');
+    }
+
+    // await this.repository.update(id, updateFightDto);
+
+    return await this.repository.findOne({ where: { id } });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} fight`;
+  async remove(id: number) {
+    const fight = await this.repository.findOne({ where: { id } });
+    if (!fight) {
+      throw new NotFoundException('Fight not found');
+    }
+    return await this.repository.remove(fight);
   }
 }

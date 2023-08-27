@@ -18,12 +18,12 @@ export class Fight {
   event: Event;
 
   @ManyToOne(() => Fighter)
-  @JoinColumn({ name: 'fighter1_id' })
-  fighter1: Fighter;
+  @JoinColumn({ name: 'fighterA_id' })
+  fighterA: Fighter;
 
   @ManyToOne(() => Fighter)
-  @JoinColumn({ name: 'fighter2_id' })
-  fighter2: Fighter;
+  @JoinColumn({ name: 'fighterB_id' })
+  fighterB: Fighter;
 
   @Column()
   resultado: string;

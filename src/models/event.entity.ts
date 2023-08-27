@@ -7,10 +7,10 @@ export class Event {
   id: number;
 
   @Column()
-  nome: string;
+  name: string;
 
   @Column()
-  localizacao: string;
+  location: string;
 
   @Column()
   data: Date;
