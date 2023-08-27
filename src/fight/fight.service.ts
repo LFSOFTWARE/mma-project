@@ -77,6 +77,10 @@ export class FightService {
   }
 
   async update(id: number, updateFightDto: UpdateFightDto) {
+    const fightUpdate: any = {
+      resultado: updateFightDto.resultado,
+    };
+
     const fight = await this.repository.findOne({
       where: { id },
     });
@@ -85,13 +89,47 @@ export class FightService {
       throw new NotFoundException('Fight not found');
     }
 
-    // await this.repository.update(id, updateFightDto);
+    if (updateFightDto.event !== null) {
+      const event = await this.eventRepository.findOne({
+        where: { id: updateFightDto.event },
+      });
+      if (!event) {
+        throw new NotFoundException('Event not found');
+      }
+      fightUpdate.event = event;
+    }
+
+    if (updateFightDto.fighterA !== null) {
+      const fighterA = await this.fighterRepository.findOne({
+        where: { id: updateFightDto.fighterA },
+      });
+
+      if (!fighterA) {
+        throw new NotFoundException('FighterA not found');
+      }
+      fightUpdate.fighterA = fighterA;
+    }
+
+    if (updateFightDto.fighterB !== null) {
+      const fighterB = await this.fighterRepository.findOne({
+        where: { id: updateFightDto.fighterB },
+      });
+
+      if (!fighterB) {
+        throw new NotFoundException('FighterB not found');
+      }
+      fightUpdate.fighterB = fighterB;
+    }
+    await this.repository.update(id, fightUpdate);
 
     return await this.repository.findOne({ where: { id } });
   }
 
   async remove(id: number) {
-    const fight = await this.repository.findOne({ where: { id } });
+    const fight = await this.repository.findOne({
+      where: { id },
+      relations: ['event', 'fighterA', 'fighterB'],
+    });
     if (!fight) {
       throw new NotFoundException('Fight not found');
     }

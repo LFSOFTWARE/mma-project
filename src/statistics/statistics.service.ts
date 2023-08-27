@@ -74,10 +74,6 @@ export class StatisticsService {
     return { statistics, total };
   }
 
-  update(id: number, updateStatisticDto: UpdateStatisticDto) {
-    return `This action updates a #${id} statistic`;
-  }
-
   async remove(id: number) {
     const statistic = await this.repository.findOne({ where: { id } });
     if (!statistic) {
