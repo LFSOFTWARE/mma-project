@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Event } from 'src/models/event.entity';
-import { Fight } from 'src/models/fight.entity';
-import { Fighter } from 'src/models/fighter.entity';
-import { Ranking } from 'src/models/ranking.entity';
-import { Statistics } from 'src/models/statistics.entity';
+import { Event } from 'src/entitys/event.entity';
+import { Fight } from 'src/entitys/fight.entity';
+import { Fighter } from 'src/entitys/fighter.entity';
+import { Ranking } from 'src/entitys/ranking.entity';
+import { Statistics } from 'src/entitys/statistics.entity';
 
 @Module({
   imports: [

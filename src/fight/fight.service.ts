@@ -2,10 +2,10 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateFightDto } from './dto/create-fight.dto';
 import { UpdateFightDto } from './dto/update-fight.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Fight } from 'src/models/fight.entity';
+import { Fight } from 'src/entitys/fight.entity';
 import { Repository } from 'typeorm';
-import { Fighter } from 'src/models/fighter.entity';
-import { Event } from 'src/models/event.entity';
+import { Fighter } from 'src/entitys/fighter.entity';
+import { Event } from 'src/entitys/event.entity';
 
 @Injectable()
 export class FightService {

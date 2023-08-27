@@ -4,7 +4,7 @@ import { UpdateRankingDto } from './dto/update-ranking.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Ranking } from './entities/ranking.entity';
 import { Repository } from 'typeorm';
-import { Fighter } from 'src/models/fighter.entity';
+import { Fighter } from 'src/entitys/fighter.entity';
 
 @Injectable()
 export class RankingService {

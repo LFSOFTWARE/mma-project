@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { RankingService } from './ranking.service';
 import { RankingController } from './ranking.controller';
-import { Ranking } from 'src/models/ranking.entity';
+import { Ranking } from 'src/entitys/ranking.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Fighter } from 'src/models/fighter.entity';
+import { Fighter } from 'src/entitys/fighter.entity';
 
 @Module({
   controllers: [RankingController],

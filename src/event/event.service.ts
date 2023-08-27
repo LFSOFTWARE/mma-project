@@ -2,9 +2,9 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Fight } from 'src/models/fight.entity';
+import { Fight } from 'src/entitys/fight.entity';
 import { Repository } from 'typeorm';
-import { Event } from 'src/models/event.entity';
+import { Event } from 'src/entitys/event.entity';
 
 @Injectable()
 export class EventService {
