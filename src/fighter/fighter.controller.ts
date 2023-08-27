@@ -2,15 +2,17 @@ import {
   Controller,
   Get,
   Post,
-  Body,
   Patch,
-  Param,
   Delete,
+  Param,
+  Body,
 } from '@nestjs/common';
 import { FighterService } from './fighter.service';
+import { ApiTags } from '@nestjs/swagger';
 import { CreateFighterDto } from './dto/create-fighter.dto';
 import { UpdateFighterDto } from './dto/update-fighter.dto';
 
+@ApiTags('fighters') // Tag for this controller's endpoints
 @Controller('fighter')
 export class FighterController {
   constructor(private readonly fighterService: FighterService) {}

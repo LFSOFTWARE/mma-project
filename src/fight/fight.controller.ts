@@ -10,8 +10,10 @@ import {
 import { FightService } from './fight.service';
 import { CreateFightDto } from './dto/create-fight.dto';
 import { UpdateFightDto } from './dto/update-fight.dto';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('fight')
+@ApiTags('fight') // Tag for this controller's endpoints
 export class FightController {
   constructor(private readonly fightService: FightService) {}
 
