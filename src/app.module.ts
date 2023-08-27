@@ -7,6 +7,7 @@ import { FighterModule } from './fighter/fighter.module';
 import { EventModule } from './event/event.module';
 import { FightModule } from './fight/fight.module';
 import { RankingModule } from './ranking/ranking.module';
+import { StatisticsModule } from './statistics/statistics.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { RankingModule } from './ranking/ranking.module';
     EventModule,
     FightModule,
     RankingModule,
+    StatisticsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
