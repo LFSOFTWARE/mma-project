@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { StatisticsService } from './statistics.service';
 import { CreateStatisticDto } from './dto/create-statistic.dto';
 import { UpdateStatisticDto } from './dto/update-statistic.dto';
@@ -22,8 +30,16 @@ export class StatisticsController {
     return this.statisticsService.findOne(+id);
   }
 
+  @Get(':id/fighter')
+  findByFighter(@Param('id') idFigther: string) {
+    return this.statisticsService.findByFighter(+idFigther);
+  }
+
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateStatisticDto: UpdateStatisticDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateStatisticDto: UpdateStatisticDto,
+  ) {
     return this.statisticsService.update(+id, updateStatisticDto);
   }
 
