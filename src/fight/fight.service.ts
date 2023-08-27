@@ -59,13 +59,17 @@ export class FightService {
     const [fights, total] = await this.repository.findAndCount({
       skip: (page - 1) * pageSize,
       take: pageSize,
+      relations: ['event', 'fighterA', 'fighterB'],
     });
 
     return { fights, total };
   }
 
   async findOne(id: number) {
-    const fight = await this.repository.findOne({ where: { id } });
+    const fight = await this.repository.findOne({
+      where: { id },
+      relations: ['event', 'fighterA', 'fighterB'],
+    });
     if (!fight) {
       throw new NotFoundException('Fight not found');
     }
@@ -73,7 +77,9 @@ export class FightService {
   }
 
   async update(id: number, updateFightDto: UpdateFightDto) {
-    const fight = await this.repository.findOne({ where: { id } });
+    const fight = await this.repository.findOne({
+      where: { id },
+    });
 
     if (!fight) {
       throw new NotFoundException('Fight not found');
