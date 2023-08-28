@@ -1,0 +1,56 @@
+  +---------------------+
+  |       Event         |
+  +---------------------+
+  | id: PK              |
+  | name: String        |
+  | location: String    |
+  | date: Date          |
+  +---------------------+
+           |
+           |
+           v
+  +---------------------+
+  |       Fight         |
+  +---------------------+
+  | id: PK              |
+  | event: FK           |
+  | fighterA: FK        |
+  | fighterB: FK        |
+  | resultado: String   |
+  +---------------------+
+           |
+           |
+           v
+  +---------------------+
+  |       Fighter       |
+  +---------------------+
+  | id: PK              |
+  | name: String        |
+  | weight_class: String|
+  | nationality: String |
+  | team: String        |
+  +---------------------+
+           |
+           |
+           v
+  +---------------------+
+  |     Statistics      |
+  +---------------------+
+  | id: PK              |
+  | fighter: FK         |
+  | wins: Int           |
+  | losses: Int         |
+  | knockouts: Int      |
+  | submissions: Int    |
+  +---------------------+
+           |
+           |
+           v
+  +---------------------+
+  |      Ranking        |
+  +---------------------+
+  | id: PK              |
+  | fighter: FK         |
+  | weight_class: String|
+  | posicao: Int        |
+  +---------------------+
