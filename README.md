@@ -1,14 +1,19 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+This App is a simple crud to STARFUND INC.
+
+See the swagger of the App in http://localhost:3000/api/
 
 ## Installation
 
 ```bash
 $ npm install
 ```
-
+## Change config in .ENV
+```bash
+# Change the credentials in .env for connect in database
+```
 ## Running the app
 
 ```bash
@@ -41,9 +46,9 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 
 ## Stay in touch
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+- Author - luiz_fernando-br2015@hotmail.com
+
+
 
 ## License
 
