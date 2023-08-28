@@ -15,7 +15,6 @@ export class Event {
   @Column()
   data: Date;
 
-  // Relacionamento um-para-muitos com a entidade Fight (se estiver definida)
   @OneToMany(() => Fight, (fight) => fight.event)
   fights: Fight[];
 }
