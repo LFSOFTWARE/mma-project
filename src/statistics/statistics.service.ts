@@ -1,6 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateStatisticDto } from './dto/create-statistic.dto';
-import { UpdateStatisticDto } from './dto/update-statistic.dto';
 import { Statistics } from 'src/entitys/statistics.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -22,9 +21,11 @@ export class StatisticsService {
     if (!fighter) {
       throw new NotFoundException('Fighter not found');
     }
-    createStatisticDto.fighter = fighter;
 
-    const newRanking = this.repository.create(createStatisticDto);
+    const figtherDto: any = createStatisticDto;
+    figtherDto.fighter = fighter;
+
+    const newRanking = this.repository.create(figtherDto);
 
     return await this.repository.save(newRanking);
   }
