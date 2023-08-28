@@ -1,13 +1,12 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { DatabaseModule } from './database/database.module';
-import { FighterModule } from './fighter/fighter.module';
-import { EventModule } from './event/event.module';
-import { FightModule } from './fight/fight.module';
-import { RankingModule } from './ranking/ranking.module';
-import { StatisticsModule } from './statistics/statistics.module';
+import { FighterModule } from './modules/fighter/fighter.module';
+import { EventModule } from './modules/event/event.module';
+import { FightModule } from './modules/fight/fight.module';
+import { RankingModule } from './modules/ranking/ranking.module';
+import { StatisticsModule } from './modules/statistics/statistics.module';
 
 @Module({
   imports: [
@@ -22,6 +21,6 @@ import { StatisticsModule } from './statistics/statistics.module';
     StatisticsModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [],
 })
 export class AppModule {}
